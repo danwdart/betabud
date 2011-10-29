@@ -1,3 +1,25 @@
 betabud - the next generation of Bibud
 
-Written in Javascript and for phones!
+Programmed in ZF2, Betabud will have functionality to:
+
+Play media locally, privately, publically or remotely:
+  Play audio
+  Play video
+  View pictures
+
+Interact with social media:
+  Facebook
+  Twitter
+  status.net
+
+Use instant messaging (Jabber)
+
+Manage your users
+Communicate with other instances and share data upon request
+Share files and provide an encrypted storage medium, interact with:
+  Ubuntu One
+  DropBox
+  CryptoBox
+  Gmail
+
+To help, please contact dandart@googlemail.com
