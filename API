@@ -1,0 +1,76 @@
+The API for Betabud will be an installable REST interface
+
+All APIs will default to "jsonpretty". Optional parameter: format - accepts json, xml
+If the request format is application/json - POST/PUT will accept JSON Parameters.
+Optional attributes for authentication:
+  access_token (cookie or same request format as api call)
+  username & password (same request format as api call)
+  Session Id (cookie or same request format as api call)
+
+GET /media/
+List the media available.
+A lot of this data will be retrieved on demand (that data which requires opening the file).
+The database storage is simply an index.
+
+Output (default in jsonpretty, others available, see above):
+{
+    "Audio": {
+        "Artist1" : {
+            "Album1" : [
+                {
+                    "Track" : 1,
+                    "Title" : "Title of Song",
+                    "Length" : "3:22", /* Or 1:22:22 etc */
+                    "Genre" : "Industrial Metal", /* entirely custom */
+                    "Format" : "ogg", /* lowercase "ogg" / "flac" etc */
+                    "Bitrate" : "320", /* kbps, average if variance is VBR */
+                    "BitrateVariance" : "VBR", /* VBR/CBR/etc */
+                    "Size" : "4249800", /* Size in bytes */
+                    "Year" : "1973", /* if present */
+                    "DateAdded" : "2011-02-10 19:18:20", /* UTC */
+                    "Mood" : "", /* undecided */
+                    "Comments" : { /* This is yet again the comments helper */
+                        "UId" : "1232f38f792f",
+                        "Comment" : "awesomesauce"
+                    }
+                }
+            ]
+        }
+    },
+    "Video" : [
+        {
+            "Title" : "Sample Video",
+            "Length" : "27:22",
+            "Width" : 1920,
+            "Height" : 1080,
+            "Format" :""webm",
+            "Bitrate" : "4248",
+            "Size" : "42000600",
+            "Comments" : {
+                "UId" : "420",
+                "Comment" : "Epic!"
+            }
+        }
+    ],
+    "Pictures" : [
+        {
+            "Title" : "My hat",
+            "Width" : 400,
+            "Height" : 400,
+            "Format" : "png", /* lowercased, png recommended, others accepted */
+            "Comments" : {
+                "UId" : "23789f7891",
+                "Comment" : "Interesting"
+            }
+        }
+    ]
+}
+
+GET /media/audio, /media/video, /media/pictures - retrieves the above subobject respectively.
+
+POST /upload
+Params: file
+Encoding: x-multipart/form-data
+does MIME type detection, magic number detection and file extension detection.
+Uploads the file to the correct destination.
+Returns one element that would go in the above object (array_merge-able).
