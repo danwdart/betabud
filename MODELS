@@ -44,3 +44,26 @@ Axioms of a model:
         which it could then parse to the format:
             Names.123abc.FirstName: Bob
 
+The way that Models work is:
+
+1. A model has a list of types of fields - this being one collection 
+2. A collection can either start with no fields or some fields.
+3. A collection can either be a list of fields or a list of other collections (or children) with id as child rather than field name
+4. A standard collection can stand for both.
+5. An extended collection can be like a child.
+
+E.g.:
+
+{
+    id: 1,
+    Email: dandart@googlemail.com,
+    Credentials: {
+        _id: 127891,
+        openidassoc: 42486264
+    }
+}
+
+Main class User has 
+Collection using _id,Email,Credentials,
+Credentials is a collection using nothing - read/write fields - only accepts children (usually of one type)
+Children are collections with stuff already populated - read only fields.
