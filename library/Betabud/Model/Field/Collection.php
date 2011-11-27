@@ -7,7 +7,12 @@ class Betabud_Model_Field_Collection extends Betabud_Model_Field_Abstract implem
 
     public function __construct(Array $arrFields)
     {
-        $this->_arrFields = $arrFields;
+	$arrObjFields = array();
+	// Not sure where this should go but...
+	foreach($arrFields as $strKey => $field) {
+	    $arrObjFields[$strKey] = new $field;
+	}
+        $this->_arrFields = $arrObjFields;
         $this->_arrKeys = array_keys($arrFields);
     }
 
