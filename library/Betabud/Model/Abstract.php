@@ -9,13 +9,18 @@ abstract class Betabud_Model_Abstract
 
     protected function __construct()
     {
-        $this->_collFields = new Betabud_Model_Field_Collection($this->_arrFields);
+        $this->_collFields = new Betabud_Model_Field_Collection(static::_getFields());
+    }
+
+    protected static function _getFields()
+    {
+        return static::$_arrFields;
     }
 
     private function _getFieldObject($strField)
     {
         try {
-            return $this->_collFields->seek($strField)
+            return $this->_collFields->seek($strField);
         } catch(OutOfBoundsException $e) {
             throw new Betabud_Model_Exception_FieldDoesNotExist($strField);
         }

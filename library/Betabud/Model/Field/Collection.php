@@ -22,7 +22,7 @@ class Betabud_Model_Field_Collection extends Betabud_Model_Field_Abstract implem
             throw new OutOfBoundsException($strKey. ' is not a valid key');
         }
 
-        return $this-?_arrFields[$strKey];
+        return $this->_arrFields[$strKey];
     }        
 
     public function current()
@@ -41,6 +41,11 @@ class Betabud_Model_Field_Collection extends Betabud_Model_Field_Abstract implem
     public function next()
     {
         $this->_intOffset++;
+    }
+
+    public function rewind()
+    {
+        $this->_intOffset = 0;
     }
 
     public function valid()
