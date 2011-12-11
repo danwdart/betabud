@@ -9,7 +9,7 @@ abstract class Betabud_Model_Abstract
 
     protected function __construct()
     {
-        $this->_collFields = new Betabud_Model_Field_Collection(static::$_arrFields);
+        $this->_collFields = new Betabud_Model_Field_Collection_Assoc(static::$_arrFields);
     }
 
     private function _getFieldObject($strField)
@@ -19,6 +19,14 @@ abstract class Betabud_Model_Abstract
         } catch(OutOfBoundsException $e) {
             throw new Betabud_Model_Exception_FieldDoesNotExist($strField);
         }
+    }
+
+    protected function _addChildToCollection(Betabud_Model_Abstract_Child $modelChild)
+    {
+        $strClass = get_class($modelChild);
+        $strFieldName = $strClass::getParentFieldName(); // @TODO protect this
+        $collection = $this->_getField($strFieldName, array());
+        $collection->add($modelChild);
     }
 
     protected function _getField($strField, $mixedDefault)

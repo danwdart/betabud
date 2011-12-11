@@ -17,3 +17,13 @@ set_include_path(implode(PATH_SEPARATOR, array(
 require_once 'Zend/Loader/Autoloader.php';
 $loader = Zend_Loader_Autoloader::getInstance();
 $loader->registerNamespace('Betabud_');
+$loader->registerNamespace('Hamcrest_');
+$loader->registerNamespace('Mongo_');
+
+require_once 'Mockery/Loader.php';
+require_once 'Mockery/Configuration.php';
+$mockery_loader = new \Mockery\Loader;
+$mockery_loader->register();
+Mockery::getConfiguration()->allowMockingNonExistentMethods(false);
+
+require_once 'Hamcrest/hamcrest.php';

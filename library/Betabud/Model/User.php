@@ -14,7 +14,7 @@ class Betabud_Model_User extends Betabud_Model_Abstract_Base
         self::FIELD_Username => 'Betabud_Model_Field_Field',
         self::FIELD_Password => 'Betabud_Model_Field_Field',
         self::FIELD_Nick => 'Betabud_Model_Field_Field',
-        self::CHILD_ASSOC_Credentials => 'Betabud_Model_Field_Collection'
+        self::CHILD_ASSOC_Credentials => 'Betabud_Model_Field_Collection_Assoc'
     );
 
     public static function create($strUsername, $strPassword)
