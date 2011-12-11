@@ -5,9 +5,7 @@ class Betabud_Model_Field_Collection extends Betabud_Model_Field_Abstract implem
     private $_arrKeys = array();
     private $_intOffset = 0;
 
-    protected 4_arrFields
-
-    public function __construct(Array $arrFields)
+    public function __construct(Array $arrFields = array())
     {
 	$arrObjFields = array();
 	// Not sure where this should go but...

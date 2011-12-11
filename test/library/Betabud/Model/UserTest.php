@@ -3,11 +3,20 @@ class Betabud_Model_UserTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function testGetSetUsername()
     {
-        $modelUser = Betabud_Model_User::create();
-        $strUsername = 'Dan';
-        $modelUser->setUsername($strUsername);
-        $this->assertEquals($strUsername, $modelUser->getUsername());
+        $strUsername = 'Username';
+        $strPassword = 'Password';
+        $modelUser = Betabud_Model_User::create($strUsername, $strPassword);
+        $this->assertEquals(strtolower($strUsername), $modelUser->getUsername());
     }
     
-    public function testGetSet
+    public function testGetSetNick()
+    {
+        $strUsername = 'Username';
+        $strPassword = 'Password';
+        $modelUser = Betabud_Model_User::create($strUsername, $strPassword);
+        $strNick = 'Dan';
+        $this->assertNull($modelUser->getNick());
+        $modelUser->setNick($strNick);
+        $this->assertEquals($strNick, $modelUser->getNick());
+    }
 }

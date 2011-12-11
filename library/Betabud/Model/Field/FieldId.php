@@ -1,6 +1,5 @@
 <?php
-namespace _Betabud_Model_Field;
-class FieldId extends Abstract
+class Betabud_Model_Field_FieldId extends Betabud_Model_Field_Abstract
 {
     private $_mixedValue = null;
 
@@ -19,7 +18,7 @@ class FieldId extends Abstract
 
     public function getValue($mixedValue)
     {
-        return $this=>_mixedValue);
+        return $this->_mixedValue;
     }
 }
 
