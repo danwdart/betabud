@@ -7,6 +7,8 @@ class Betabud_Model_User extends Betabud_Model_Abstract
     const FIELD_Nick = 'Nick';
     const CHILD_ASSOC_Credentials = 'Credentials';
 
+    const SALT = 'dguqwtduR^%$*%%';
+
     protected static $_arrFields = array(
         self::FIELD_ID => 'Betabud_Model_Field_Field',
         self::FIELD_Username => 'Betabud_Model_Field_Field',
@@ -30,6 +32,10 @@ class Betabud_Model_User extends Betabud_Model_Abstract
         return $this->_getField(self::FIELD_Username, $mixedDefault);
     }
 
+    public function setPassword($strPassword)
+    {
+        $this->_setField(self::FIELD_Password, sha1(self::SALT, $strPassword);
+    }
     public function save()
     {
         // Not Implemented
