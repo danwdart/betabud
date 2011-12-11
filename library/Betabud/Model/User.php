@@ -1,5 +1,5 @@
 <?php
-class Betabud_Model_User extends Betabud_Model_Abstract
+class Betabud_Model_User extends Betabud_Model_Abstract_Base
 {
     const FIELD_ID = '_id';
     const FIELD_Username = 'Username';

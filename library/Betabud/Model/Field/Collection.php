@@ -1,4 +1,7 @@
 <?php
+/**
+ * This is a collection of any type of field.
+**/
 class Betabud_Model_Field_Collection extends Betabud_Model_Field_Abstract implements SeekableIterator, Serializable, Countable
 {
     private $_arrFields = array();
