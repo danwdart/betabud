@@ -10,14 +10,14 @@ class Betabud_Dao_Mongo_User extends Betabud_Dao_Mongo_Abstract
 
         $arrUser = $this->_getCollection()->findOne($arrQuery);
         if(is_null($arrUser)) {
-            throw new Exception('Cannot find a user'); // TODO better exception
+            throw new Betabud_Dao_Exception_User_NotFound();
         }
         return $this->_convertToModel($arrUser);
     }
 
     protected function _convertToModel($arrUser)
     {
-        return Betabud+Model_User::createFromDao($this, $arrUser);
+        return Betabud_Model_User::createFromDao($this, $arrUser);
     }
 
     public function save(Betabud_Model_User $modelUser)

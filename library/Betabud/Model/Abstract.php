@@ -17,8 +17,13 @@ abstract class Betabud_Model_Abstract
         try {
             return $this->_collFields->seek($strField);
         } catch(OutOfBoundsException $e) {
-            throw new Betabud_Model_Exception_FieldDoesNotExist($strField);
+            throw new Betabud_Model_Exception_FieldDoesNotExist(get_class($this), $strField);
         }
+    }
+
+    protected function _getCollFields()
+    {
+        return $this->_collFields;
     }
 
     protected function _addChildToCollection(Betabud_Model_Abstract_Child $modelChild)

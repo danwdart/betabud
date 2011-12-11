@@ -10,11 +10,12 @@ class Betabud_Model_Field_Field extends Betabud_Model_Field_Abstract
 
     public function setValue($mixedValue)
     {
+        $this->_isDirty = true;
         $this->_mixedValue = $mixedValue;
     }
 
-    public function getValue($mixedValue)
+    public function getValue()
     {
-        return($this->isDefault()?$mixedValue:$this->_mixedValue);
+        return($this->isDefault()?null:$this->_mixedValue);
     }
 }

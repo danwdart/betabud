@@ -1,8 +1,7 @@
 <?php
 class Betabud_Model_User extends Betabud_Model_Abstract_Base
 {
-    const FIELD_ID = '_id';
-    const FIELD_Username = 'Username';
+    const FIELD_Username = Betabud_Dao_Mongo_Abstract::FIELD_Id;
     const FIELD_Password = 'Password';
     const FIELD_Nick = 'Nick';
     const CHILD_ASSOC_Credentials = 'Credentials';
@@ -10,8 +9,7 @@ class Betabud_Model_User extends Betabud_Model_Abstract_Base
     const SALT = 'dguqwtduR^%$*%%';
 
     protected static $_arrFields = array(
-        self::FIELD_ID => 'Betabud_Model_Field_FieldId',
-        self::FIELD_Username => 'Betabud_Model_Field_Field',
+        self::FIELD_Username => 'Betabud_Model_Field_FieldId',
         self::FIELD_Password => 'Betabud_Model_Field_Field',
         self::FIELD_Nick => 'Betabud_Model_Field_Field',
         self::CHILD_ASSOC_Credentials => 'Betabud_Model_Field_Collection_Assoc'
@@ -20,19 +18,25 @@ class Betabud_Model_User extends Betabud_Model_Abstract_Base
     public static function create($strUsername, $strPassword)
     {
         $modelUser = new self();
-        $modelUser->_setField(self::FIELD_Username, strtolower($strUsername));
-        $modelUser->setPassword($strPassword);
+        $modelUser->_setField(self::FIELD_Username, self::encodeUsername($strUsername));
+        $modelUser->_setField(self::FIELD_Password, self::encodePassword($strPassword));
         return $modelUser;
+    }
+
+    public static function encodeUsername($strUsername)
+    {
+        return strtolower($strUsername);
+    }
+
+    /** I'm not sure about this */
+    public function encodePassword($strPassword)
+    {
+        return sha1(self::SALT.$strPassword);
     }
 
     public function getUsername()
     {
         return $this->_getField(self::FIELD_Username, null);
-    }
-
-    public function setPassword($strPassword)
-    {
-        $this->_setField(self::FIELD_Password, sha1(self::SALT, $strPassword));
     }
 
     public function getNick()

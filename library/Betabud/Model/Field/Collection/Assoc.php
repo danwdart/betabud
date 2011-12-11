@@ -4,9 +4,7 @@
 **/
 class Betabud_Model_Field_Collection_Assoc extends Betabud_Model_Field_Collection_Abstract
 {
-    private $_arrFields = array();
     private $_arrKeys = array();
-    private $_intOffset = 0;
 
     public function __construct(Array $arrFields = array())
     {
@@ -30,7 +28,7 @@ class Betabud_Model_Field_Collection_Assoc extends Betabud_Model_Field_Collectio
 
     public function current()
     {
-        if($this->valid()) {
+        if(!$this->valid()) {
             throw new OutOfBoundsException($this->_intOffset. ' is not a valid offset');
         }    
         return $this->_arrFields[$this->_arrKeys[$this->_intOffset]];
@@ -38,29 +36,14 @@ class Betabud_Model_Field_Collection_Assoc extends Betabud_Model_Field_Collectio
 
     public function key()
     {
-        return $this->_intOffset;
-    }
-
-    public function next()
-    {
-        $this->_intOffset++;
-    }
-
-    public function rewind()
-    {
-        $this->_intOffset = 0;
+        return $this->_arrKeys[$this->_intOffset];
     }
 
     public function valid()
     {
-        return isset($this->_arrFields[$this->_arrKeys[$this->_intOffset]]);
+        return isset($this->_arrKeys[$this->_intOffset]);
     }
     
-    public function count()
-    {
-        return count($this->_arrFields);
-    }
-
     public function serialize()
     {
         return serialize($this->_arrFields);

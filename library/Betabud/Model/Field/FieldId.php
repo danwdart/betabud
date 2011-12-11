@@ -10,13 +10,14 @@ class Betabud_Model_Field_FieldId extends Betabud_Model_Field_Abstract
 
     public function setValue($mixedValue)
     {
-        if(!$this->isDefault) {
+        if(!$this->isDefault()) {
             throw new _Betabud_Model_Abstract_Exception_CannotResetId();
         } 
+        $this->_isDirty = true;
         $this->_mixedValue = $mixedValue;
     }
 
-    public function getValue($mixedValue)
+    public function getValue()
     {
         return $this->_mixedValue;
     }

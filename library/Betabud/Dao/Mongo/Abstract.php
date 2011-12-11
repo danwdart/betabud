@@ -17,30 +17,36 @@ abstract class Betabud_Dao_Mongo_Abstract
     {
         $arrCriteria = array(self::FIELD_Id => $modelBase->getId());
         $arrUpdate = array('$set' => array(), '$addToSet' => array());
-        $this->_saveCollection($modelBase->getCollection($this), $arrUpdate);
+        $this->_saveCollection($modelBase->preUpdateFromDao($this), $arrUpdate);
         $this->_getCollection()->updateArray($arrCriteria, $arrUpdate);
     }
 
-    private function _saveCollection(Betabud_Model_Field_Collection $collection, &$arrUpdate, $strPrefix = '')
+    private function _saveCollection(Betabud_Model_Field_Collection_Abstract $collection, &$arrUpdate, $strPrefix = '')
     {
-        foreach($collection as $strFieldName => $objField) {
-            $location = $strPrefix.$strFieldName;
-            $strClass = get_class($objField);
-            switch($strClass) {
-                case 'Betabud_Model_Field_Collection_Assoc':
-                    $this->_saveCollection($objField, $arrUpdate, $strPrefix.'.');
-                case 'Betabud_Model_Field_Field':
-                    $arrUpdate['$set'][$location] = $objField->getValue();
-                    break;
-                case 'Betabud_Model_Field_Array':
-                    $arrUpdate['$addToSet'][$location] = array(
-                        '$each' => array(
-                            $objField->getValue()
-                        )
-                    );
-                    break;
-                default:
-                    throw new Exception('Not Implemented class '.$strClass);
+        if(!$collection->isEmpty()) {
+            foreach($collection as $strFieldName => $objField) {
+                if($objField->isDirty()) {
+                    $location = $strPrefix.$strFieldName;
+                    $strClass = get_class($objField);
+                    switch($strClass) {
+                        case 'Betabud_Model_Field_Collection_Assoc':
+                            $this->_saveCollection($objField, $arrUpdate, $strPrefix.'.');
+                            break;
+                        case 'Betabud_Model_Field_Field':
+                        case 'Betabud_Model_Field_FieldId':
+                            $arrUpdate['$set'][$location] = $objField->getValue();
+                            break;
+                        case 'Betabud_Model_Field_Array':
+                            $arrUpdate['$addToSet'][$location] = array(
+                                '$each' => array(
+                                    $objField->getValue()
+                                )
+                            );
+                            break;
+                        default:
+                            throw new Exception('Not Implemented class '.$strClass);
+                    }
+                }
             }
         }
     }
@@ -72,7 +78,7 @@ abstract class Betabud_Dao_Mongo_Abstract
         return $this->_getConnection()->distinct($this->_strDatabase, $strCollection, $strKey, $arrCommand);
     }
 
-    abstract protected function _convertToModel(Array $arrMongo);
+   // abstract protected function _convertToModel(Array $arrMongo);
 
     // You must implement save()
 }
