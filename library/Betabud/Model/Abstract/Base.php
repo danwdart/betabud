@@ -3,11 +3,11 @@ abstract class Betabud_Model_Abstract_Base extends Betabud_Model_Abstract
 {
     const FIELD_Id ='_id';
 
-    public static function createFromDao(Betabud_Dao_Mongo_Abstract $dao, Array $arrMongo)
+    public static function createFromDao(Betabud_Dao_Interface $dao, Array $arrDao)
     {
         $model = new static();
 
-        foreach($arrMongo as $strKey => $value) {
+        foreach($arrDao as $strKey => $value) {
             if(is_array($value)) {
                 // TODO implement child class
             }
@@ -22,7 +22,7 @@ abstract class Betabud_Model_Abstract_Base extends Betabud_Model_Abstract
         return $this->_getField(self::FIELD_Id, null);
     }
 
-    public function preUpdateFromDao(Betabud_Dao_Mongo_Abstract $dao)
+    public function preUpdateFromDao(Betabud_Dao_Interface $dao)
     {
         return $this->_getCollFields();
     }

@@ -1,5 +1,5 @@
 <?php
-abstract class Betabud_Dao_Mongo_Abstract
+abstract class Betabud_Dao_Mongo_Abstract implements Betabud_Dao_Interface
 {
     const FIELD_Id = Mongo_Connection::MONGO_FIELD_ID;
 
