@@ -51,14 +51,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             define(strtoupper($key), $value);
         }
     }
+
     protected function _initSql()
     {
-        $config = new Zend_Config_Ini(APPLICATION_PATH . '/config/sql.ini;');
+        $config = new Zend_Config_Ini(APPLICATION_PATH . '/config/sql.ini');
         $zendDb = Zend_Db::factory($config->database);
 
         $zendDb->getConnection();
 
         Betabud_Dao_Sql_Abstract::setAdapter($zendDb);
-
     }
 }

@@ -1,4 +1,5 @@
 <?php
+use Betabud\Model\User as User;
 class LoginController extends Betabud_Controller_Action_App
 {
     private $_redirect_url;
