@@ -1,0 +1,32 @@
+<p>Sites enabled:</p>
+<ul>
+    <?php foreach($this->sites as $site) : ?>
+    <li><?php echo $site->getFullName(); ?> - <a href="/app/status/request?site=<?php echo $site->getId(); ?>">Add User</a></li>
+    <?php endforeach; ?>
+</ul>
+
+<p>Users you have:</p>
+<ul>
+    <?php foreach($this->users as $user) : ?>
+    <li><strong><?php echo $user->getScreenName(); ?></strong> on <i><?php echo $user->getSite()->getFullName(); ?></i></li>
+    <?php endforeach; ?>
+</ul>
+
+<?php if(count($this->users) > 0) : ?>
+<br />
+<?php echo $this->status_form; ?>
+
+<?php endif; ?>
+
+<script>
+$(document).ready(function() {
+    $('#status').focus();
+    $('#status').keyup(function(e) {
+        if(e.keyCode == 13) {
+            Page.submitForm($('#Submit'), e);
+            $(this).val('');
+            $(this).focus();
+        }
+    });
+});
+</script>

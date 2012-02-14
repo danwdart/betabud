@@ -4817,7 +4817,7 @@
         <territoryCodes type="UM" numeric="581" alpha3="UMI"/>
         <territoryCodes type="US" numeric="840" alpha3="USA"/>
         <territoryCodes type="UY" numeric="858" alpha3="URY"/>
-        <territoryCodes type="UZ" numeric="860" alpha3="UZB"/>
+        <territoryCodes type="UZ" numeric="860" alpha3="UBetabud"/>
         <territoryCodes type="VA" numeric="336" alpha3="VAT" fips10="VT"/>
         <territoryCodes type="VC" numeric="670" alpha3="VCT"/>
         <territoryCodes type="VE" numeric="862" alpha3="VEN"/>

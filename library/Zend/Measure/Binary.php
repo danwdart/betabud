@@ -14,9 +14,9 @@
  *
  * @category  Zend
  * @package   Zend_Measure
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id: Binary.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version   $Id: Binary.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
@@ -31,7 +31,7 @@ require_once 'Zend/Locale.php';
  * @category   Zend
  * @package    Zend_Measure
  * @subpackage Zend_Measure_Binary
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Measure_Binary extends Zend_Measure_Abstract
@@ -109,10 +109,10 @@ class Zend_Measure_Binary extends Zend_Measure_Abstract
         'EXBIBYTE'         => array('1152921504606846976',       'EiB'),
         'EXA_BINARY_BYTE'  => array('1152921504606846976',       'EiB'),
         'EXABYTE_SI'       => array('1000000000000000000',       'EB.'),
-        'ZETTABYTE'        => array('1180591620717411303424',    'ZB'),
+        'ZETTABYTE'        => array('1180591620717411303424',    'Betabud'),
         'ZEBIBYTE'         => array('1180591620717411303424',    'ZiB'),
         'ZETTA_BINARY_BYTE'=> array('1180591620717411303424',    'ZiB'),
-        'ZETTABYTE_SI'     => array('1000000000000000000000',    'ZB.'),
+        'ZETTABYTE_SI'     => array('1000000000000000000000',    'Betabud.'),
         'YOTTABYTE'        => array('1208925819614629174706176', 'YB'),
         'YOBIBYTE'         => array('1208925819614629174706176', 'YiB'),
         'YOTTA_BINARY_BYTE'=> array('1208925819614629174706176', 'YiB'),

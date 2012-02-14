@@ -1,0 +1,131 @@
+* {
+    padding:0;
+    margin:0;
+	font-family:Tahoma, Geneva, sans-serif;
+}
+
+body {
+    background-color: #333333;
+}
+#contentwrapper {
+    margin: 0 auto;
+    width: 1000px;
+    background-color: #ffffff;
+}
+
+header {
+    border-bottom: solid 1px black;
+    height: 25px;
+}
+header h1 {
+    font-weight:100;
+    text-align:center;
+    font-size: 28pt;
+}
+
+header .left {
+    text-align: left;
+    float:left;
+    width: 32%;
+    padding-left: 10px;
+}
+
+header .right {
+    text-align: right;
+    float:right;
+    width: 32%;
+    padding-right:10px;
+}
+
+header .centre {
+    text-align: center;
+    float:left;
+    width: 30%;
+    padding: 0 10px;
+    font-weight: 700;
+}
+
+
+#appspace {
+    height: 600px;
+}
+
+#appspace #load {
+    height: 28px;
+    width: 28px;
+    margin: 253px 483px;
+    line-height: 100%;
+}
+
+#appcontent {
+    padding: 5px;
+    height: 570px;
+    overflow: auto;
+}
+
+input[type=button], input[type=submit]
+{
+    padding: 2px;
+    margin: 4px;
+}
+
+.messages {
+    font-weight: bold;
+    width: 200px;
+}
+
+.messages li {
+    list-style: none;
+}
+
+.info {
+    color: green;
+}
+
+.warn {
+    color: #888800;
+}
+
+.error {
+    color: red;
+}
+
+#launcher {
+    margin: 0 auto;
+    text-align:center;
+     font-size: 14pt;
+     border-top: solid 1px black;
+     height: 50px;
+     list-style:none;
+     padding:5px;
+}
+
+
+#launcher a {
+    display:inline-block;
+    padding: 10px;
+    border: 2px outset  #999999;
+    border-radius:3px;
+    background:-webkit-gradient(linear,100% 0%,0% 100%,from(#AAA),to(#CCC));
+    color:#000;
+    text-decoration:none;
+    vertical-align:middle;
+}
+
+.centre {
+    text-align: center !important;
+    margin: 0 auto !important;
+}
+
+.centre .messages {
+    text-align: center !important;
+    margin: 0 auto !important;
+}
+
+.space {
+    line-height: 1.3em;
+}
+
+.pad {
+    padding: 5px;
+}

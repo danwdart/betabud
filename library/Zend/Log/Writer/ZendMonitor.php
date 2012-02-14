@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ZendMonitor.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: ZendMonitor.php 23351 2010-11-16 18:09:45Z matthew $
  */
 
 /** Zend_Log_Writer_Abstract */
@@ -27,28 +27,26 @@ require_once 'Zend/Log/Writer/Abstract.php';
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ZendMonitor.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: ZendMonitor.php 23351 2010-11-16 18:09:45Z matthew $
  */
 class Zend_Log_Writer_ZendMonitor extends Zend_Log_Writer_Abstract
 {
     /**
      * Is Zend Monitor enabled?
-     *
-     * @var boolean
+     * @var bool
      */
     protected $_isEnabled = true;
 
     /**
      * Is this for a Zend Server intance?
-     *
-     * @var boolean
+     * @var bool
      */
     protected $_isZendServer = false;
 
     /**
-     * @return void
+     * @throws Zend_Log_Exception if Zend Monitor extension not present
      */
     public function __construct()
     {
@@ -64,7 +62,8 @@ class Zend_Log_Writer_ZendMonitor extends Zend_Log_Writer_Abstract
      * Create a new instance of Zend_Log_Writer_ZendMonitor
      *
      * @param  array|Zend_Config $config
-     * @return Zend_Log_Writer_ZendMonitor
+     * @return Zend_Log_Writer_Syslog
+     * @throws Zend_Log_Exception
      */
     static public function factory($config)
     {
@@ -78,7 +77,7 @@ class Zend_Log_Writer_ZendMonitor extends Zend_Log_Writer_Abstract
      * fail silently. You can query this method to determine if the log
      * writer is enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function isEnabled()
     {
@@ -88,7 +87,7 @@ class Zend_Log_Writer_ZendMonitor extends Zend_Log_Writer_Abstract
     /**
      * Log a message to this writer.
      *
-     * @param  array $event log data event
+     * @param  array $event  log data event
      * @return void
      */
     public function write($event)
@@ -103,7 +102,7 @@ class Zend_Log_Writer_ZendMonitor extends Zend_Log_Writer_Abstract
     /**
      * Write a message to the log.
      *
-     * @param  array  $event log data event
+     * @param  array  $event  log data event
      * @return void
      */
     protected function _write($event)
@@ -117,10 +116,10 @@ class Zend_Log_Writer_ZendMonitor extends Zend_Log_Writer_Abstract
                 // On Zend Server; third argument should be the event
                 zend_monitor_custom_event($priority, $message, $event);
             } else {
-                // On Zend Platform; third argument is severity -- either
+                // On Zend Platform; third argument is severity -- either 
                 // 0 or 1 -- and fourth is optional (event)
                 // Severity is either 0 (normal) or 1 (severe); classifying
-                // notice, info, and debug as "normal", and all others as
+                // notice, info, and debug as "normal", and all others as 
                 // "severe"
                 monitor_custom_event($priority, $message, ($priority > 4) ? 0 : 1, $event);
             }

@@ -1,0 +1,22 @@
+<table>
+<thead>
+    <tr>
+        <th>Filename</th>
+        <th>Size</th>
+    </tr>
+</thead>
+<tbody>
+    <?php foreach($this->audio_files as $file) : ?>
+    <tr>
+        <td><?php echo $file['filename']; ?></td>
+        <td><?php echo $file['size']; ?></td>
+    </tr>
+    <?php endforeach; ?>
+</tbody>
+</table>
+
+<script>
+$(document).ready(function() {
+    $('#appspace').after('<audio id="audio" src="" style="height: 25px; width: 100%;">You need HTML5 to view this audio.</audio>');
+});
+</script>

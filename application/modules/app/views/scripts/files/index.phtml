@@ -1,0 +1,17 @@
+<table>
+<thead>
+    <tr>
+        <th>Filename</th>
+        <th>Size</th>
+    </tr>
+</thead>
+<tbody>
+    <?php foreach($this->files as $file) : ?>
+    <tr>
+        <td><?php echo $file['filename']; ?></td>
+        <td><?php echo $file['size']; ?></td>
+    </tr>
+    <?php endforeach; ?>
+</tbody>
+</table>
+

@@ -1,5 +1,6 @@
 <?php
-class IndexController extends Zend_Controller_Action
+
+class IndexController extends Betabud_Controller_Action_App
 {
     public function indexAction()
     {

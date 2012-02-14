@@ -14,9 +14,9 @@
  *
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id: Size.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version   $Id: Size.php 22668 2010-07-25 14:50:46Z thomas $
  */
 
 /**
@@ -29,7 +29,7 @@ require_once 'Zend/Validate/Abstract.php';
  *
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_File_Size extends Zend_Validate_Abstract
@@ -326,7 +326,7 @@ class Zend_Validate_File_Size extends Zend_Validate_Abstract
      */
     protected function _toByteString($size)
     {
-        $sizes = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+        $sizes = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'Betabud', 'YB');
         for ($i=0; $size >= 1024 && $i < 9; $i++) {
             $size /= 1024;
         }

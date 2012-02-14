@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title><?php echo APP_NAME; ?></title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <script type="text/javascript" src="/js/jquery-1.5.min.js"></script>
+    <script type="text/javascript" arc="/js/jquery.color.js"></script>
+    <script type="text/javascript" src="/js/script.js"></script>
+</head>
+<body>
+    <header>
+        <?php echo $this->render('_header.phtml'); ?>
+    </header>
+    <div id="appcontent">
+        <?php if(!is_null($this->session_messages)) : ?>
+            <div class="centre messages pad"><?php echo $this->session_messages; ?></div>
+       i<?php endif; ?>
+        <?php echo $this->layout()->content; ?>
+        <?php echo $this->messages; ?>
+    </div>
+</body>
+</html>

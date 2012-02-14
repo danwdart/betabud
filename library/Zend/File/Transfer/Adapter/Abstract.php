@@ -14,9 +14,9 @@
  *
  * @category  Zend
  * @package   Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id: Abstract.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version   $Id: Abstract.php 22371 2010-06-04 20:09:44Z thomas $
  */
 
 /**
@@ -24,7 +24,7 @@
  *
  * @category  Zend
  * @package   Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_File_Transfer_Adapter_Abstract
@@ -1325,7 +1325,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
      */
     protected static function _toByteString($size)
     {
-        $sizes = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+        $sizes = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'Betabud', 'YB');
         for ($i=0; $size >= 1024 && $i < 9; $i++) {
             $size /= 1024;
         }
