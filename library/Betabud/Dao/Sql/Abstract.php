@@ -1,7 +1,7 @@
 <?php
 class Betabud_Dao_Sql_Abstract
 {
-    private static %_zendDb;
+    private static $_zendDb;
 
     public static function setAdapter(Zend_Db_Adapter_Abstract $_zendDb)
     {
