@@ -1,14 +1,25 @@
-Betabud: Bibud in Zend - to integrate with Betabud and be a server!
+betabud - the next generation of Bibud
 
-Requirements:
+Programmed in Zend Framework, Betabud will have functionality to:
 
-PHP 5.2+
-A database engine (Propel is configured to use MySQL with these details by default):
- Host: localhost
- Username: zetabud
- Password: zetabud
- DB: zetabud
-`
-Requirements to configure Propel:
-PEAR
-Phing 1.3.3
+Play media locally, privately, publically or remotely:
+  Play audio
+  Play video
+  View pictures
+
+Interact with social media:
+  Facebook
+  Twitter
+  status.net
+
+Use instant messaging
+
+Manage your users
+Communicate with other instances and share data upon request
+Share files and provide an encrypted storage medium, interact with:
+  Ubuntu One
+  DropBox
+  CryptoBox
+  Gmail
+
+To help, please contact dandart@googlemail.com
