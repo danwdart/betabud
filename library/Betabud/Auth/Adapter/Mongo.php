@@ -1,5 +1,5 @@
 <?php
-class Betabud_Auth_Adapter_Mongo extends Zend_Auth_Adapter_Interface
+class Betabud_Auth_Adapter_Mongo implements Zend_Auth_Adapter_Interface
 {
     public function __construct($strUsername, $strPassword)
     {
@@ -14,7 +14,7 @@ class Betabud_Auth_Adapter_Mongo extends Zend_Auth_Adapter_Interface
             $identity = new Betabud_Auth_Identity($modelUser);
             return new Zend_Auth_Result(Zend_Auth_Result::SUCCESS, $identity);
         } catch(Betabud_Dao_Exception_User_NotFound $e) {
-            return new Zend_Auth_Result(Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID, null, array($e->getMessage());
+            return new Zend_Auth_Result(Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID, null, array($e->getMessage()));
         }
     }
 }

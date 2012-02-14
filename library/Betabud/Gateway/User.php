@@ -17,4 +17,4 @@ class Betabud_Gateway_User
     {
         $this->_daoUser->save($modelUser);
     }
-
+}
