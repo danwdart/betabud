@@ -111,7 +111,7 @@ class App_StatusController extends Betabud_Controller_Action_App
              $this->_session->access_token = serialize($token);
              $this->_session->request_token = null;
              $user = new OStatus_User();
-             $user->setUser(User::getIdentity());
+             $user->setUser(Betabud_Auth::getInstance()->getIdentity()->getUser());
              $user->setSiteId($this->_session->site_id);
              $user->setAccessToken(serialize($token));
              $user->save();

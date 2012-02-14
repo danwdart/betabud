@@ -31,8 +31,9 @@ class LoginController extends Betabud_Controller_Action_App
 
             if(isset($post['Login']))
             {
-                if(User::doLogin($username, $password))
-                {
+                $adapter = new Betabud_Auth_Adapter_Mongo($username, $password);
+                $auth = Betabud_Auth::getInstance()->authenticate($adapter);
+                if($auth->hasIdentity()) {
                     $this->_redirect($this->_redirect_url);
                 }
                 else
@@ -67,7 +68,7 @@ class LoginController extends Betabud_Controller_Action_App
         $renderer = $this->getHelper('ViewRenderer');
         $renderer->setNoRender(true);
 
-        User::doLogout();
+        Betabud_Auth::getInstance()->clearIdeniity();
         $this->_redirect($this->_redirect_url);
     }
 
@@ -96,7 +97,8 @@ class LoginController extends Betabud_Controller_Action_App
                         'class' => 'warn'
                     ));
                 }
-
+                // Todo: replace with Zend_Validate
+                /*
                 if(!User::isValidEmail($email))
                 {
                     $this->addMessage(array(
@@ -129,16 +131,15 @@ class LoginController extends Betabud_Controller_Action_App
                         'class' => 'warn'
                     ));
                 }
+                 */
                 
                 if(is_null($this->getMessages()))
                 {
                     try
                     {
-                        $user = new User();
-                        $user->setUsername($username);
-                        $user->setPassword(User::encryptPassword($password));
+                        $user = Betabud_Model_User::create($strUsername, $strPassword);;
                         $user->setEmail($email);
-                        $user->setFullname($fullname);
+                        $user->setNick($fullname);
                         $user->save();
     
                         $this->addMessage(array(
@@ -176,10 +177,9 @@ class LoginController extends Betabud_Controller_Action_App
 
         $form = $this->_getUserDataForm(true);
 
-        $user = User::getIdentity();
+        $user = Betabud_Auth::getInstance()->getIdentity()->getUser();
 
-        $form->username->setValue($user->getUsername());
-        $form->fullname->setValue($user->getFullname());
+        $form->fullname->setValue($user->getNick());
         $form->email->setValue($user->getEmail());
 
         if($this->isPost())
@@ -188,7 +188,6 @@ class LoginController extends Betabud_Controller_Action_App
 
             if(isset($post['Save']))
             {
-                $username = $post['username'];
                 $oldpassword = $post['oldpassword'];
                 $password = $post['password'];
                 $password2 = $post['password2'];
@@ -212,6 +211,7 @@ class LoginController extends Betabud_Controller_Action_App
                     ));
                 }
 
+                /*
                 if(!User::isValidEmail($email))
                 {
                     $this->addMessage(array(
@@ -236,15 +236,14 @@ class LoginController extends Betabud_Controller_Action_App
                         'class' => 'warn'
                     ));
                 }
-
+                */
                 if(is_null($this->getMessages()))
                 {
                     try
                     {
-                        $user->setUsername($username);
-                        $user->setPassword(User::encryptPassword($password));
+                        $user->setPassword($password);
                         $user->setEmail($email);
-                        $user->setFullname($fullname);
+                        $user->setNick($fullname);
                         $user->save();
 
                         $this->_redirect('/');
@@ -272,21 +271,21 @@ class LoginController extends Betabud_Controller_Action_App
 
     private function _getLoginForm()
     {
-        $form = new Betabud_Form();
+        $form = new Zend_Form();
         $form->setMethod('post');
         $form->setAction('/login?redirect=' . $this->_redirect_url);
 
-        $username = new Betabud_Form_Element_Text('username');
+        $username = new Zend_Form_Element_Text('username');
         $username->setLabel('Username:');
 
-        $password = new Betabud_Form_Element_Password('password');
+        $password = new Zend_Form_Element_Password('password');
         $password->setLabel('Password:');
 
-        $submit = new Betabud_Form_Element_Submit('Login');
+        $submit = new Zend_Form_Element_Submit('Login');
 
-        $register = new Betabud_Form_Element_Submit('Register');
+        $register = new Zend_Form_Element_Submit('Register');
 
-//      $forgot = new Betabud_Form_Element_Submit('Forgot');
+//      $forgot = new Zend_Form_Element_Submit('Forgot');
 //      $forgot->setLabel('Forgot Password');
 
         $form->addElements(array($username, $password, $submit, $register));
@@ -296,7 +295,7 @@ class LoginController extends Betabud_Controller_Action_App
 
     private function _getUserDataForm($edit = false)
     {
-        $form = new Betabud_Form();
+        $form = new Zend_Form();
         $form->setMethod('post');
         $form->setAction('/login/register');
         if($edit)
@@ -304,31 +303,31 @@ class LoginController extends Betabud_Controller_Action_App
             $form->setAction('/userinfo');
         }
 
-        $username = new Betabud_Form_Element_Text('username');
+        $username = new Zend_Form_Element_Text('username');
         $username->setLabel('Username:');
 
         if($edit)
         {
-            $oldpassword = new Betabud_Form_Element_Password('oldpassword');
+            $oldpassword = new Zend_Form_Element_Password('oldpassword');
             $oldpassword->setLabel('Old Password:');
         }
 
-        $password = new Betabud_Form_Element_Password('password');
+        $password = new Zend_Form_Element_Password('password');
         $password->setLabel('Password:');
 
-        $password2 = new Betabud_Form_Element_Password('password2');
+        $password2 = new Zend_Form_Element_Password('password2');
         $password2->setLabel('Repeat Password:');
 
-        $fullname = new Betabud_Form_Element_Text('fullname');
+        $fullname = new Zend_Form_Element_Text('fullname');
         $fullname->setLabel('Full Name:');
 
-        $email = new Betabud_Form_Element_Text('email');
+        $email = new Zend_Form_Element_Text('email');
         $email->setLabel('Email Address:');
 
-        $register = new Betabud_Form_Element_Submit('Register');
+        $register = new Zend_Form_Element_Submit('Register');
         if($edit)
         {
-            $register = new Betabud_Form_Element_Submit('Save');
+            $register = new Zend_Form_Element_Submit('Save');
         }
 
         $form->addElement($username);
@@ -342,7 +341,4 @@ class LoginController extends Betabud_Controller_Action_App
 
         return $form;
     } 
-
-
-
 }

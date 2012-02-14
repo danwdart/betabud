@@ -4,7 +4,7 @@ class App_FilesController extends Betabud_Controller_Action_App
     public function preDispatch()
     {
         $files_path = realpath(APPLICATION_PATH . '/../user/');
-        $user_path = $files_path . '/' . User::getIdentity()->getId() . '/';
+        $user_path = $files_path . '/' . Betabud_Auth::getInstance()->getIdentity()->getUsername() . '/';
 
         if(!is_dir($user_path))
         {

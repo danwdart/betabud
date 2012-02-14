@@ -4,6 +4,7 @@ class Betabud_Model_User extends Betabud_Model_Abstract_Base
     const FIELD_Username = Betabud_Dao_Mongo_Abstract::FIELD_Id;
     const FIELD_Password = 'Password';
     const FIELD_Nick = 'Nick';
+    const FIELD_Email = 'Email';
     const CHILD_ASSOC_Credentials = 'Credentials';
 
     const SALT = 'dguqwtduR^%$*%%';
@@ -12,6 +13,7 @@ class Betabud_Model_User extends Betabud_Model_Abstract_Base
         self::FIELD_Username => 'Betabud_Model_Field_FieldId',
         self::FIELD_Password => 'Betabud_Model_Field_Field',
         self::FIELD_Nick => 'Betabud_Model_Field_Field',
+        self::FIELD_Email => 'Betabud_Model_Field_Email',
         self::CHILD_ASSOC_Credentials => 'Betabud_Model_Field_Collection_Assoc'
     );
 
@@ -33,6 +35,11 @@ class Betabud_Model_User extends Betabud_Model_Abstract_Base
     {
         return sha1(self::SALT.$strPassword);
     }
+    
+    public function setPassword($strPassword)
+    {
+        $this->_setField(self::FIELD_Password, self::encodePassword($strPassword));
+    }
 
     public function getUsername()
     {
@@ -47,6 +54,16 @@ class Betabud_Model_User extends Betabud_Model_Abstract_Base
     public function setNick($strNick)
     {
         $this->_setField(self::FIELD_Nick, $strNick);
+    }
+
+    public function getEmail()
+    {
+        return $this->_getField(self::FIELD_Email, null);
+    }
+
+    public function setEmail($strEmail)
+    {
+        $this->_setField(self::FIELD_Email, $strEmail);
     }
 
     public function __get($strProperty)

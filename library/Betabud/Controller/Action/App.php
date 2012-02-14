@@ -94,7 +94,7 @@ class Betabud_Controller_Action_App extends Betabud_Controller_Action
         }
     }
 
-    protected function _redirect($url)
+    protected function _redirect($url, array $options = array())
     {
         if($this->isAjax())
         {
@@ -115,7 +115,7 @@ class Betabud_Controller_Action_App extends Betabud_Controller_Action
 
     protected function requireLogin()
     {
-        if(!User::hasIdentity())
+        if(!Betabud_Auth::getInstance()->hasIdeniity())
         {
             $this->login();
         }
@@ -123,7 +123,7 @@ class Betabud_Controller_Action_App extends Betabud_Controller_Action
 
     protected function isLoggedIn()
     {
-        return User::hasIdentity();
+        return Betabud_Auth::getInstance()->hasIdeniity();
     }
 
     public function postDispatch()

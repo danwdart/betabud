@@ -3,7 +3,7 @@ abstract class Betabud_Dao_Sql_Abstract implements Betabud_Dao_Interface
 {
     private static $_zendDb;
 
-    public static function setAdapter(Zend_Db_Adapter_Abstract $_zendDb)
+    public static function setAdapter(Zend_Db_Adapter_Abstract $zendDb)
     {
         self::$_zendDb = $zendDb;
     }

@@ -13,19 +13,19 @@ class App_BlogController extends Betabud_Controller_Action_App
     {
         $this->requireLogin();
 
-        $form = new Betabud_Form();
+        $form = new Zend_Form();
 
         $form->setMethod('post');
         $form->setAction('');
 
-        $title = new Betabud_Form_Element_Text('Title');
+        $title = new Zend_Form_Element_Text('Title');
         $title->setLabel('Title');
 
-        $text = new Betabud_Form_Element_Textarea('Text');
+        $text = new Zend_Form_Element_Textarea('Text');
         $text->setOptions(array('style' => 'height: 150px; width: 300px;'));
         $text->setLabel('Text');
 
-        $submit = new Betabud_Form_Element_Submit('Submit');
+        $submit = new Zend_Form_Element_Submit('Submit');
 
         $id = new Zend_Form_Element_Hidden('id');
 
@@ -53,7 +53,7 @@ class App_BlogController extends Betabud_Controller_Action_App
             if($form->isValid($this->getRequest()->getPost()))
             {
                 $blog->fromArray($form->getValues());
-                $blog->setUser(User::getIdentity());
+                $blog->setUser(Betabud_Auth::getInstance()->getIdentity()->getUser());
                 $blog->save();
 
                 $this->setMessage(array(

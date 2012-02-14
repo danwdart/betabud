@@ -2,7 +2,7 @@ class Blog extends BaseBlog
 {
     public function isMine()
     {
-        return(User::getIdentity() == $this->getUser());
+        return(Betabud_Auth::getInstance()->getIdentity()->getUser() == $this->getUser());
     }
 
 }

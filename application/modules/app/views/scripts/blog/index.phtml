@@ -1,5 +1,5 @@
 <div id="blogs">
-<?php if(User::isLoggedIn()) : ?>
+<?php if(Betabud_Auth::getInstance()->hasIdeniity()) : ?>
     <a href="/app/blog/write">Create a blog post &raquo;</a>
 <?php else : ?>
     <a href="/login?redirect=/app/blog/write">Login to create a blog post &raquo;</a>
