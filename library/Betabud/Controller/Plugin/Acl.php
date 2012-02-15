@@ -35,6 +35,7 @@ class Betabud_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
         $strAction = $request->getActionName();
 
         $auth = Betabud_Auth::getInstance();
+        // If we're on default don't bother with the /controller bit - it's all the same
         $resource = ($defaultModule == $strModule)?$defaultModule:$strModule.'/'.$strController;
         $role = $auth->hasIdentity() ? $auth->getIdentity()->getUser()->getUserType()->getUserType(): Betabud_Model_User_Helper_UserType::TYPE_GUEST;
         
