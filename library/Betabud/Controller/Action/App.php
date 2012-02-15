@@ -115,7 +115,7 @@ class Betabud_Controller_Action_App extends Betabud_Controller_Action
 
     protected function requireLogin()
     {
-        if(!Betabud_Auth::getInstance()->hasIdeniity())
+        if(!Betabud_Auth::getInstance()->hasIdentity())
         {
             $this->login();
         }
@@ -123,7 +123,7 @@ class Betabud_Controller_Action_App extends Betabud_Controller_Action
 
     protected function isLoggedIn()
     {
-        return Betabud_Auth::getInstance()->hasIdeniity();
+        return Betabud_Auth::getInstance()->hasIdentity();
     }
 
     public function postDispatch()

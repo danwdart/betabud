@@ -5,7 +5,7 @@ class Betabud_Model_User extends Betabud_Model_Abstract_Base
     const FIELD_Password = 'Password';
     const FIELD_Nick = 'Nick';
     const FIELD_Email = 'Email';
-    const FIELD_UserTypeId = 'TypeId';
+    const FIELD_UserTypeId = 'UserTypeId';
     const CHILD_ASSOC_Credentials = 'Credentials';
 
     const SALT = 'dguqwtduR^%$*%%';
@@ -71,6 +71,11 @@ class Betabud_Model_User extends Betabud_Model_Abstract_Base
     public function getUserType()
     {
         return new Betabud_Model_User_Helper_UserType($this->_getField(self::FIELD_UserTypeId, Betabud_Model_User_Helper_UserType::ID_GUEST));
+    }
+
+    public function setUserType(Betabud_Model_User_Helper_UserType $helperUserType)
+    {
+        $this->_setField(self::FIELD_UserTypeId, $helperUserType->getUserTypeId());
     }
 
     public function __get($strProperty)

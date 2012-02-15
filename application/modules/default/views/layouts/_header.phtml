@@ -13,8 +13,9 @@ endif;
 </div>
 
 <div class="right">
-    <?php if(Betabud_Auth::getInstance()->hasIdentity()) : ?>
-    Logged in as <strong><?php echo Betabud_Auth::getInstance()->getIdentity()->getUser()->getUsername(); ?></strong> | <a href="/userinfo">User Info</a> | <a href="/logout">Logout</a>
+    <?php if(Betabud_Auth::getInstance()->hasIdentity()) :
+        $modelUser = Betabud_Auth::getInstance()->getIdentity()->getUser(); ?>
+        Logged in as <strong><?php echo $modelUser->getUsername(); ?> - <?php echo $modelUser->getUserType()->getUserType();?></strong> | <a href="/userinfo">User Info</a> | <a href="/logout">Logout</a>
     <?php else: ?>
         <a href="/login">Login</a>
     <?php endif; ?>

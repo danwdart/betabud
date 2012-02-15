@@ -17,7 +17,7 @@ class Betabud_Model_User_Helper_UserType
 
     private static $_arrTypes = array(
         self::ID_GUEST => self::TYPE_GUEST,
-        self::ID_USER =< self::TYPE_USER,
+        self::ID_USER => self::TYPE_USER,
         self::ID_SILVER => self::TYPE_SILVER,
         self::ID_GOLD => self::TYPE_GOLD,
         self::ID_MINION => self::TYPE_MINION,
@@ -34,12 +34,12 @@ class Betabud_Model_User_Helper_UserType
         $this->_intTypeId = $intTypeId;
     }
 
-    public function getTypeId()
+    public function getUserTypeId()
     {
         return $this->_intTypeId;
     }
 
-    public function getType()
+    public function getUserType()
     {
         return self::$_arrTypes[$this->_intTypeId];
     }

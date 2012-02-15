@@ -1,5 +1,4 @@
 <?php
-
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initAutoload()
@@ -21,6 +20,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             array(1 => 'id')
         );
         $router->addRoute('product', $route);
+        */
         $route = new Zend_Controller_Router_Route_Static(
             'logout',
             array(
@@ -40,7 +40,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         );
 
         $router->addRoute('userinfo', $route);
-	*/
     }
  
     protected function _initConstants()
@@ -61,5 +60,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $zendDb->getConnection();
 
         Betabud_Dao_Sql_Abstract::setAdapter($zendDb);
+    }
+
+    protected function _initAcl()
+    {
+        //TODO: ACL
     }
 }

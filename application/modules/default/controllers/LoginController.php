@@ -69,7 +69,7 @@ class LoginController extends Betabud_Controller_Action_App
         $renderer = $this->getHelper('ViewRenderer');
         $renderer->setNoRender(true);
 
-        Betabud_Auth::getInstance()->clearIdeniity();
+        Betabud_Auth::getInstance()->clearIdentity();
         $this->_redirect($this->_redirect_url);
     }
 

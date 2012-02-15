@@ -14,8 +14,8 @@ class Betabud_Model_Field_Field extends Betabud_Model_Field_Abstract
         $this->_mixedValue = $mixedValue;
     }
 
-    public function getValue()
+    public function getValue($mixedDefault)
     {
-        return($this->isDefault()?null:$this->_mixedValue);
+        return($this->isDefault()?$mixedDefault:$this->_mixedValue);
     }
 }
