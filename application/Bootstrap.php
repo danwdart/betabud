@@ -8,6 +8,69 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $autoloader->registerNamespace('Mongo_');
     }
 
+    protected function _initAcl()
+    {
+        $acl = new Zend_Acl();
+
+        $acl->addRole(
+            new Zend_Acl_Role(
+                Betabud_Model_User_Helper_UserType::TYPE_GUEST
+            )
+        );
+
+        $acl->addRole(
+            new Zend_Acl_Role(
+                Betabud_Model_User_Helper_UserType::TYPE_USER
+            ),
+            Betabud_Model_User_Helper_UserType::TYPE_GUEST
+        );
+
+        $acl->addRole(
+            new Zend_Acl_Role(
+                Betabud_Model_User_Helper_UserType::TYPE_SILVER
+            ),
+            Betabud_Model_User_Helper_UserType::TYPE_USER
+        );
+
+        $acl->addRole(
+            new Zend_Acl_Role(
+                Betabud_Model_User_Helper_UserType::TYPE_GOLD
+            ),
+            Betabud_Model_User_Helper_UserType::TYPE_SILVER
+        );
+
+        $acl->addRole(
+            new Zend_Acl_Role(
+                Betabud_Model_User_Helper_UserType::TYPE_MINION
+            ),
+            Betabud_Model_User_Helper_UserType::TYPE_GOLD
+        );
+
+        $acl->addRole(
+            new Zend_Acl_Role(
+                Betabud_Model_User_Helper_UserType::TYPE_GOD
+            ),
+            Betabud_Model_User_Helper_UserType::TYPE_MINION
+        );
+        
+        $this->bootstrap('frontController');
+        $this->frontController->registerPlugin(new Betabud_Controller_Plugin_Acl($acl));
+        Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
+        Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(Betabud_Model_User_Helper_UserType::TYPE_GUEST);
+        Zend_Registry::set('acl', $acl);
+        
+    }
+
+    protected function _initConstants()
+    {
+        $config = new Zend_Config_Ini(APPLICATION_PATH . '/config/zetabud.ini');
+
+        foreach($config->zb->toArray() as $key => $value)
+        {
+            define(strtoupper($key), $value);
+        }
+    }
+
     protected function _initRoutes()
     {
         $router = Zend_Controller_Front::getInstance()->getRouter();
@@ -41,16 +104,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $router->addRoute('userinfo', $route);
     }
- 
-    protected function _initConstants()
-    {
-        $config = new Zend_Config_Ini(APPLICATION_PATH . '/config/zetabud.ini');
-
-        foreach($config->zb->toArray() as $key => $value)
-        {
-            define(strtoupper($key), $value);
-        }
-    }
 
     protected function _initSql()
     {
@@ -61,9 +114,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         Betabud_Dao_Sql_Abstract::setAdapter($zendDb);
     }
-
-    protected function _initAcl()
+  
+    protected function _bootstrap($resource = null)
     {
-        //TODO: ACL
+        try {
+            parent::_bootstrap($resource);
+        } catch(Exception $e) {
+            echo $e->getMessage();
+        }
+    } 
+
+    public function run()
+    {
+       try {
+           parent::run();
+       } catch(Exception $e) {
+           echo $e->getMessage();
+       }
     }
 }

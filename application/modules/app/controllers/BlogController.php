@@ -3,9 +3,10 @@ class App_BlogController extends Betabud_Controller_Action_App
 {
     public function indexAction()
     {
-        $blogs = BlogQuery::create()
-            ->orderByModifiedDate()
-            ->find();
+        $blogs = Betabud_Gateway::getInstance()
+                                ->getBlog()
+                                ->getAllBlogs()
+                                ->sort(array(Betabud_Model_Blog::FIELD_TIMEMODIFIED => Betabud_Iterator_Interface::SORT_ASC));
         $this->view->assign('blogs', $blogs);
     }
 
