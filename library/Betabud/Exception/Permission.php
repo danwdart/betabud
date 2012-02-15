@@ -1,5 +1,5 @@
 <?php
-class Betabud_Exception_Permission
+class Betabud_Exception_Permission extends Exception
 {
     const MESSAGE = 'Sorry - you don\'t have permission to do that.';
 

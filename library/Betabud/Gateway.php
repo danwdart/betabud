@@ -29,4 +29,9 @@ class Betabud_Gateway
     {
         return new Betabud_Gateway_User(new Betabud_Dao_Mongo_User());
     }
+    
+    public function getBlog()
+    {
+        return new Betabud_Gateway_Blog(new Betabud_Dao_Mongo_Blog());
+    }
 }
