@@ -11,16 +11,35 @@ body {
     margin: 0 auto;
     width: 1000px;
     background-color: #ffffff;
+    background:url('/img/wood_fireloopcreative_cc_by.jpg');
+    background-size:100%;
 }
 
 header {
     border-bottom: solid 1px black;
     height: 25px;
+    background: rgb(76,76,76); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 12%, rgba(102,102,102,1) 25%, rgba(71,71,71,1) 39%, rgba(44,44,44,1) 50%, rgba(0,0,0,1) 51%, rgba(17,17,17,1) 60%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(76,76,76,1)), color-stop(12%,rgba(89,89,89,1)), color-stop(25%,rgba(102,102,102,1)), color-stop(39%,rgba(71,71,71,1)), color-stop(50%,rgba(44,44,44,1)), color-stop(51%,rgba(0,0,0,1)), color-stop(60%,rgba(17,17,17,1)), color-stop(76%,rgba(43,43,43,1)), color-stop(91%,rgba(28,28,28,1)), color-stop(100%,rgba(19,19,19,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(76,76,76,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 25%,rgba(71,71,71,1) 39%,rgba(44,44,44,1) 50%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(76,76,76,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 25%,rgba(71,71,71,1) 39%,rgba(44,44,44,1) 50%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(76,76,76,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 25%,rgba(71,71,71,1) 39%,rgba(44,44,44,1) 50%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* IE10+ */
+    background: linear-gradient(top, rgba(76,76,76,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 25%,rgba(71,71,71,1) 39%,rgba(44,44,44,1) 50%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); /* IE6-9 */
+    color: #f0f0f0;    
+    line-height:25px;
 }
 header h1 {
-    font-weight:100;
+    font-weight:500;
     text-align:center;
     font-size: 28pt;
+
+}
+header a {
+    color: #e0e0e0;
+}
+header a:hover {
+    color: #f0f0f0;
 }
 
 header .left {
@@ -48,6 +67,7 @@ header .centre {
 
 #appspace {
     height: 600px;
+
 }
 
 #appspace #load {
@@ -61,6 +81,7 @@ header .centre {
     padding: 5px;
     height: 570px;
     overflow: auto;
+
 }
 
 input[type=button], input[type=submit]
@@ -94,8 +115,7 @@ input[type=button], input[type=submit]
     margin: 0 auto;
     text-align:center;
      font-size: 14pt;
-     border-top: solid 1px black;
-     height: 50px;
+     height: 75px;
      list-style:none;
      padding:5px;
 }
@@ -103,14 +123,24 @@ input[type=button], input[type=submit]
 
 #launcher a {
     display:inline-block;
-    padding: 10px;
-    border: 2px outset  #999999;
-    border-radius:3px;
-    background:-webkit-gradient(linear,100% 0%,0% 100%,from(#AAA),to(#CCC));
+    padding: 3px;
     color:#000;
     text-decoration:none;
     vertical-align:middle;
+    width:48px;
 }
+#launcher a img {
+    width:48px;
+}
+#launcher a span {
+    color: black;
+    font-size:8pt;
+    padding:3px;
+    clear:both;
+    background-color: #ffefee;
+    border-radius: 15px;
+}
+
 
 .centre {
     text-align: center !important;
@@ -128,4 +158,32 @@ input[type=button], input[type=submit]
 
 .pad {
     padding: 5px;
+}
+
+.widgetbox {
+    padding:10px;
+}
+
+.widgetbox .widgettitle {
+    background-color: #333333;
+    color: #eeeeee;
+    text-align:center;
+    border-radius: 5px 5px 0px 0px;
+    font-weight:700;
+}
+
+.widgetbox.medium .widgettitle {
+    width: 262px;
+}
+
+.widgetbox.medium .widgetbody {
+    width:250px;
+}
+
+.widgetbox .widgetbody {
+    background-color: #fffff2;
+    border: 1px solid black;
+    border-radius: 0px 0px 5px 5px;
+    color: black;
+    padding:5px;
 }
