@@ -1,6 +1,13 @@
 <?php
 class Betabud_Dao_Mongo_User extends Betabud_Dao_Mongo_Abstract
 {
+    const COLLECTION = 'User';
+
+    protected function _getCollectionName()
+    {
+        return self::COLLECTION;
+    }
+
     public function getByUsernameAndPassword($strUsername, $strPassword)
     {
         $arrQuery = array(

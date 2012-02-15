@@ -32,7 +32,8 @@ class LoginController extends Betabud_Controller_Action_App
             if(isset($post['Login']))
             {
                 $adapter = new Betabud_Auth_Adapter_Mongo($username, $password);
-                $auth = Betabud_Auth::getInstance()->authenticate($adapter);
+                $auth = Betabud_Auth::getInstance();
+                $auth->authenticate($adapter);
                 if($auth->hasIdentity()) {
                     $this->_redirect($this->_redirect_url);
                 }
@@ -137,7 +138,7 @@ class LoginController extends Betabud_Controller_Action_App
                 {
                     try
                     {
-                        $user = Betabud_Model_User::create($strUsername, $strPassword);;
+                        $user = Betabud_Model_User::create($username, $password);;
                         $user->setEmail($email);
                         $user->setNick($fullname);
                         $user->save();
@@ -151,7 +152,7 @@ class LoginController extends Betabud_Controller_Action_App
                     catch(Exception $e)
                     {
                         $this->addMessage(array(
-                            'text' => 'Could not create account.',
+                            'text' => 'Could not create account. Reason: '.$e->getMessage(),
                             'class' => 'error'
                         ));
                     }

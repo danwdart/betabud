@@ -13,11 +13,17 @@ abstract class Betabud_Dao_Mongo_Abstract implements Betabud_Dao_Interface
     {
     }
 
+    abstract protected function _getCollectionName();
+
     protected function _save(Betabud_Model_Abstract_Base $modelBase)
     {
         $arrCriteria = array(self::FIELD_Id => $modelBase->getId());
-        $arrUpdate = array('$set' => array(), '$addToSet' => array());
+        $arrUpdate = array();
         $this->_saveCollection($modelBase->preUpdateFromDao($this), $arrUpdate);
+        if(isset($arrUpdate['$set'][self::FIELD_Id])) {
+            unset($arrUpdate['$set'][self::FIELD_Id]);
+        }
+
         $this->_getCollection()->updateArray($arrCriteria, $arrUpdate);
     }
 
@@ -58,7 +64,7 @@ abstract class Betabud_Dao_Mongo_Abstract implements Betabud_Dao_Interface
     protected function _getCollection()
     {
         if(is_null($this->_mongoCollection))
-            $this->_mongoCollection = new Mongo_Collection($this->_strDatabase, $this->_strCollection);
+            $this->_mongoCollection = new Mongo_Collection($this->_strDatabase, $this->_getCollectionName());
         return $this->_mongoCollection;
     }
 
