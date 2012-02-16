@@ -40,7 +40,7 @@ abstract class Betabud_Dao_Mongo_Abstract implements Betabud_Dao_Interface
                             break;
                         case 'Betabud_Model_Field_Field':
                         case 'Betabud_Model_Field_FieldId':
-                            $arrUpdate['$set'][$location] = $objField->getValue();
+                            $arrUpdate['$set'][$location] = $objField->getValue(null);
                             break;
                         case 'Betabud_Model_Field_Array':
                             $arrUpdate['$addToSet'][$location] = array(

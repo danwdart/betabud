@@ -141,6 +141,7 @@ class LoginController extends Betabud_Controller_Action_App
                         $user = Betabud_Model_User::create($username, $password);;
                         $user->setEmail($email);
                         $user->setNick($fullname);
+                        $user->setUserType(new Betabud_Model_User_Helper_UserType(Betabud_Model_User_Helper_UserType::ID_USER));
                         $user->save();
     
                         $this->addMessage(array(

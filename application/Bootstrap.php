@@ -105,16 +105,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute('userinfo', $route);
     }
 
-    protected function _initSql()
-    {
-        $config = new Zend_Config_Ini(APPLICATION_PATH . '/config/sql.ini');
-        $zendDb = Zend_Db::factory($config->database);
-
-        $zendDb->getConnection();
-
-        Betabud_Dao_Sql_Abstract::setAdapter($zendDb);
-    }
-  
     protected function _bootstrap($resource = null)
     {
         try {
