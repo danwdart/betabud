@@ -1,4 +1,8 @@
-<div id="blogs">
+<div class="widgetbox">
+<div class="widgettitle">
+    Blogs
+</div>
+<div class="widgetbody">
 <?php if(Betabud_Auth::getInstance()->hasIdentity()) : ?>
     <a href="/app/blog/write">Create a blog post &raquo;</a>
 <?php else : ?>
@@ -24,4 +28,5 @@ else:
 No blogs to display.
 </p>
 <?php endif; ?>
+</div>
 </div>
