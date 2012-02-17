@@ -73,6 +73,11 @@ class Betabud_Model_User extends Betabud_Model_Abstract_Base
         return new Betabud_Model_User_Helper_UserType($this->_getField(self::FIELD_UserTypeId, Betabud_Model_User_Helper_UserType::ID_GUEST));
     }
 
+    public function isGod()
+    {
+        return (Betabud_Model_User_Helper_UserType::TYPE_GOD == $this->getUserType()->getUserType());
+    }
+
     public function setUserType(Betabud_Model_User_Helper_UserType $helperUserType)
     {
         $this->_setField(self::FIELD_UserTypeId, $helperUserType->getUserTypeId());
@@ -86,6 +91,11 @@ class Betabud_Model_User extends Betabud_Model_Abstract_Base
     public function __set($strProperty, $strValue)
     {
         $this->_setField($strProperty, $strValue);
+    }
+
+    public function delete()
+    {
+        return Betabud_Gateway::getInstance()->getUser()->delete($this);
     }
 
     public function save()

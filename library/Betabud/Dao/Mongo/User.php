@@ -19,12 +19,30 @@ class Betabud_Dao_Mongo_User extends Betabud_Dao_Mongo_Abstract
         if(is_null($arrUser)) {
             throw new Betabud_Dao_Exception_User_NotFound();
         }
-        return $this->_convertToModel($arrUser);
+        return $this->convertToModel($arrUser);
     }
 
-    protected function _convertToModel($arrUser)
+    public function getByUsername($strUsername)
+    {
+        $arrQuery = array(
+            Betabud_Model_User::FIELD_Username => Betabud_Model_User::encodeUsername($strUsername),
+        );
+
+        $arrUser = $this->_getCollection()->findOne($arrQuery);
+        if(is_null($arrUser)) {
+            throw new Betabud_Dao_Exception_User_NotFound();
+        }
+        return $this->convertToModel($arrUser);
+    }
+
+    public function convertToModel($arrUser)
     {
         return Betabud_Model_User::createFromDao($this, $arrUser);
+    }
+
+    public function delete(Betabud_Model_User $modelUser)
+    {
+        $this->_delete($modelUser);
     }
 
     public function save(Betabud_Model_User $modelUser)

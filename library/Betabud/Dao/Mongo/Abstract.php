@@ -27,6 +27,12 @@ abstract class Betabud_Dao_Mongo_Abstract implements Betabud_Dao_Interface
         $this->_getCollection()->updateArray($arrCriteria, $arrUpdate);
     }
 
+    protected function _delete(Betabud_Model_Abstract_Base $modelBase)
+    {
+        $arrCriteria = array(self::FIELD_Id => $modelBase->getId());
+        $this->_getCollection()->removeArray($arrCriteria);
+    }
+
     private function _saveCollection(Betabud_Model_Field_Collection_Abstract $collection, &$arrUpdate, $strPrefix = '')
     {
         if(!$collection->isEmpty()) {
@@ -85,6 +91,7 @@ abstract class Betabud_Dao_Mongo_Abstract implements Betabud_Dao_Interface
     }
 
    // abstract protected function _convertToModel(Array $arrMongo);
-
+    
+    // You must implement delete()
     // You must implement save()
 }

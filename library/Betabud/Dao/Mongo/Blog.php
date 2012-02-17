@@ -16,9 +16,9 @@ class Betabud_Dao_Mongo_Blog extends Betabud_Dao_Mongo_Abstract
 
         $arrBlog = $this->_getCollection()->findOne($arrQuery);
         if(is_null($arrBlog)) {
-            throw new Betabud_Dao_Exception_Blog_NotFound();
+            throw new Betabud_Dao_Exception_Blog_NotFound($strBlogId);
         }
-        return $this->_convertToModel($arrBlog);
+        return $this->convertToModel($arrBlog);
     }
 
     public function getAllBlogs()
@@ -28,9 +28,14 @@ class Betabud_Dao_Mongo_Blog extends Betabud_Dao_Mongo_Abstract
         return new Betabud_Iterator_Dao_Mongo_Cursor($cursorBlogs, $this);
     }
 
-    protected function _convertToModel($arrBlog)
+    public function convertToModel($arrBlog)
     {
         return Betabud_Model_Blog::createFromDao($this, $arrBlog);
+    }
+
+    public function delete(Betabud_Model_Blog $modelBlog)
+    {
+        $this->_delete($modelBlog);
     }
 
     public function save(Betabud_Model_Blog $modelBlog)

@@ -17,7 +17,10 @@ class App_Bootstrap extends Zend_Application_Module_Bootstrap
             $acl->add(new Zend_Acl_Resource('app/blog'));
                  
             $acl->allow(Betabud_Model_User_Helper_UserType::TYPE_GUEST, 'app/blog', 'index');
-            $acl->allow(Betabud_Model_User_Helper_UserType::TYPE_USER, 'app/blog', 'write');
+            $acl->allow(Betabud_Model_User_Helper_UserType::TYPE_USER, 'app/blog', array(
+                'write',
+                'delete'
+            ));
         }
     }
 }

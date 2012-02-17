@@ -18,6 +18,11 @@ class Betabud_Gateway_Blog
         return $this->_daoBlog->getAllBlogs();
     }
     
+    public function delete(Betabud_Model_Blog $modelBlog)
+    {
+        $this->_daoBlog->delete($modelBlog);
+    }
+
     public function save(Betabud_Model_Blog $modelBlog)
     {
         $this->_daoBlog->save($modelBlog);

@@ -22,6 +22,8 @@ abstract class Betabud_Model_Abstract_Base extends Betabud_Model_Abstract
         return $this->_getField(self::FIELD_Id, null);
     }
 
+    abstract public function delete();
+
     public function preUpdateFromDao(Betabud_Dao_Interface $dao)
     {
         return $this->_getCollFields();

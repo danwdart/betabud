@@ -14,47 +14,34 @@ class App_BlogController extends Betabud_Controller_Action_App
     {
         $this->requireLogin();
 
-        $form = new Zend_Form();
+        $form = new App_Form_BlogCreate();
 
-        $form->setMethod('post');
-        $form->setAction('');
-
-        $title = new Zend_Form_Element_Text('Title');
-        $title->setLabel('Title');
-
-        $text = new Zend_Form_Element_Textarea('Text');
-        $text->setOptions(array('style' => 'height: 150px; width: 300px;'));
-        $text->setLabel('Text');
-
-        $submit = new Zend_Form_Element_Submit('Submit');
-
-        $id = new Zend_Form_Element_Hidden('id');
-
-        $form->addElements(array($title, $text, $id, $submit));
-
-        $id = $this->getRequest()->getPost('id');
-        if(!is_numeric($id))
-        {
-            $id = $this->getRequest()->getQuery('id');
-            if(!empty($id) && !is_numeric($id))
-            {
-                $this->redirect('/app/blog');
-            }
-        }
-
-        $blog = BlogPeer::retrieveByPK($id);
-
-        if(!$blog instanceof Blog || !$blog->isMine())
-        {
-            $blog = new Blog();
-        }
-
+        $id = $this->getRequest()->getQuery('id', null);
+        
         if($this->getRequest()->isPost())
         {
             if($form->isValid($this->getRequest()->getPost()))
             {
-                $blog->fromArray($form->getValues());
-                $blog->setUser(Betabud_Auth::getInstance()->getIdentity()->getUser());
+                $strTitle = $form->Title->getValue();
+                $strBody = $form->Body->getValue();
+
+                $id = $this->getRequest()->getPost('id');
+                try {
+                    $blog = Betabud_Gateway::getInstance()->getBlog()->getByBlogId($id);
+                    if(!$blog->isMine()) {
+                        return $this->setMessage(array(
+                            'text' => 'Blog not yours to edit!',
+                            'class' => 'error',
+                            'redirect' => '/app/blog'
+                        ));
+                    }
+                    $blog->setTitle($strTitle);
+                    $blog->setBody($strBody);
+                } catch(Betabud_Dao_Exception_Blog_NotFound $e) {
+                    $modelUser = Betabud_Auth::getInstance()->getIdentity()->getUser();
+                    $blog = Betabud_Model_Blog::create($strTitle, $strBody, $modelUser);
+                }
+
                 $blog->save();
 
                 $this->setMessage(array(
@@ -73,7 +60,10 @@ class App_BlogController extends Betabud_Controller_Action_App
         }
         else
         {
-            $form->setDefaults($blog->toArray());
+            if(!is_null($id)) {
+                $blog = Betabud_Gateway::getInstance()->getBlog()->getByBlogId($id);
+                $form->setValuesFromBlog($blog);
+            }
         }
 
         $this->view->assign('form', $form);
@@ -83,13 +73,10 @@ class App_BlogController extends Betabud_Controller_Action_App
     {
         $id = $this->getRequest()->getQuery('id');
 
-        if(!is_numeric($id))
-        {
-            $this->_redirect('/app/blog');
-        }
-
-        $blog = BlogPeer::retrieveByPK($id);
-        if(!$blog instanceof Blog || !$blog->isMine())
+        $blog = Betabud_Gateway::getInstance()->getBlog()->getByBlogId($id);
+        if (!$blog instanceof Betabud_Model_Blog ||
+            !$blog->isMine() ||
+            !Betabud_Auth::getInstance()->getIdentity()->getUser()->isGod())
         {
             $this->_redirect('/app/blog');
         }

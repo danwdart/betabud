@@ -12,13 +12,13 @@
 <?php if(count($this->blogs) > 0) :
     foreach($this->blogs as $blog) : ?>
         <p><strong><?php echo $blog->getTitle(); ?></strong>
-        <br /><i>By <?php echo $blog->getUser()->getUsername(); ?> on <?php echo $blog->getPublishedDate(); ?></i>
+        <br /><i>By <?php echo $blog->getUser()->getUsername(); ?> on <?php echo $blog->getDateModified(); ?></i>
         <?php if($blog->isMine()) : ?>
             <a href="/app/blog/write?id=<?php echo $blog->getId(); ?>">Edit</a> |
             <a href="/app/blog/delete?id=<?php echo $blog->getId(); ?>">Delete</a>
         <?php endif; ?>
         </p>
-        <p><?php echo $blog->getText(); ?></p>
+        <p><?php echo $blog->getBody(); ?></p>
         <br />
 <?php
     endforeach;

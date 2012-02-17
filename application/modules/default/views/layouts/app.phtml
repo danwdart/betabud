@@ -13,8 +13,12 @@
     </header>
     <div id="appcontent">
         <?php if(!is_null($this->session_messages)) : ?>
-            <div class="centre messages pad"><?php echo $this->session_messages; ?></div>
-       i<?php endif; ?>
+        <div class="widgetbox">
+            <div class="centre messages pad widgetbody">
+                <?php echo $this->session_messages; ?>
+            </div>
+        </div>
+        <?php endif; ?>
         <?php echo $this->layout()->content; ?>
         <?php echo $this->messages; ?>
     </div>

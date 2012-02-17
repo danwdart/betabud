@@ -6,7 +6,7 @@ class Betabud_Model_Blog extends Betabud_Model_Abstract_Base
     const FIELD_BODY = 'Body';
     const FIELD_TIMECREATED = 'TimeCreated';
     const FIELD_TIMEMODIFIED = 'TimeModified';
-    const FIELD_USERID = 'UserId';
+    const FIELD_USERNAME = 'Username';
 
     protected static $_arrFields = array(
         self::FIELD_BLOGID => 'Betabud_Model_Field_FieldId',
@@ -14,7 +14,7 @@ class Betabud_Model_Blog extends Betabud_Model_Abstract_Base
         self::FIELD_BODY => 'Betabud_Model_Field_Field',
         self::FIELD_TIMECREATED => 'Betabud_Model_Field_Field',
         self::FIELD_TIMEMODIFIED => 'Betabud_Model_Field_Field',
-        self::FIELD_USERID => 'Betabud_Model_Field_Field'
+        self::FIELD_USERNAME => 'Betabud_Model_Field_Field'
     );
 
     public static function create($strTitle, $strBody, Betabud_Model_User $modelUser)
@@ -25,13 +25,23 @@ class Betabud_Model_Blog extends Betabud_Model_Abstract_Base
         $modelBlog->_setField(self::FIELD_BODY, $strBody);
         $modelBlog->_setField(self::FIELD_TIMECREATED, time());
         $modelBlog->_setField(self::FIELD_TIMEMODIFIED, time());
-        $modelBlog->_setField(self::FIELD_USERID, $modelUser->getUserId());
-        return $modelUser;
+        $modelBlog->_setField(self::FIELD_USERNAME, $modelUser->getUsername());
+        return $modelBlog;
     }
 
     public function isMine()
     {
         return (Betabud_Auth::getInstance()->getIdentity()->getUser() == $this->getUser());
+    }
+
+    public function getUser()
+    {
+        return Betabud_Gateway::getInstance()->getUser()->getByUsername($this->getUsername());
+    }
+
+    public function getUsername()
+    {
+        return $this->_getField(self::FIELD_USERNAME, null);
     }
     
     public function getBlogId()
@@ -58,12 +68,23 @@ class Betabud_Model_Blog extends Betabud_Model_Abstract_Base
     public function setBody($strBody)
     {
         $this->_setField(self::FIELD_BODY, $strBody);
-        $this->_setField(self::FIELD_TIMEMODIFIED, $strBody);
+        $this->_setField(self::FIELD_TIMEMODIFIED, time());
     }
 
     public function getDateModified()
     {
-        return date('d/m/Y H:i:s', $this->_getField(self::FIELD_TIMEMODIFIED, null));
+        return date('d/m/Y H:i:s', (int)$this->_getField(self::FIELD_TIMEMODIFIED, null));
+    }
+
+    public function setValuesFromForm(App_Blog_Form_BlogCreate $formBlog)
+    {
+        $this->setTitle($formBlog->Title->getValue());
+        $this->setBody($formBlog->Body->getValue());
+    }        
+
+    public function delete()
+    {
+        return Betabud_Gateway::getInstance()->getBlog()->delete($this);
     }
 
     public function save()
