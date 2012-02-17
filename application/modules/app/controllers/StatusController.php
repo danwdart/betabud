@@ -19,7 +19,7 @@ class App_StatusController extends Betabud_Controller_Action_App
         }
         if(intval($site_id) > 0)
         {
-            $this->_site = OStatus_SitePeer::retrieveByPK($site_id);
+            $this->_site = Betabud_Gateway::getInstance()->getOStatus_Site()->getBySiteId($site_id);
             $this->_config = $this->_site->getConfig(); 
         }
     }
@@ -34,8 +34,9 @@ class App_StatusController extends Betabud_Controller_Action_App
 
         $this->view->assign('apptitle', 'Social Status');
 
-        $sites = OStatus_SitePeer::retrieveAll();
-        $users = OStatus_UserPeer::retrieveMine();
+        $modelUser = Betabud_Auth::getInstance()->getIdentity()->getUser();
+        $sites = Betabud_Gateway::getInstance()->getOStatus_Site()->getAllSites();
+        $users = Betabud_Gateway::getInstance()->getOStatus_User()->getByUser($modelUser);
 
         $this->view->assign('sites', $sites);
         $this->view->assign('users', $users);
@@ -110,7 +111,7 @@ class App_StatusController extends Betabud_Controller_Action_App
              $token = $consumer->getAccessToken( $_GET, unserialize($this->_session->request_token));
              $this->_session->access_token = serialize($token);
              $this->_session->request_token = null;
-             $user = new OStatus_User();
+             $user = Betabud_Model_OStatus_Usernew OStatus_User();
              $user->setUser(Betabud_Auth::getInstance()->getIdentity()->getUser());
              $user->setSiteId($this->_session->site_id);
              $user->setAccessToken(serialize($token));

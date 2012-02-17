@@ -34,4 +34,14 @@ class Betabud_Gateway
     {
         return new Betabud_Gateway_Blog(new Betabud_Dao_Mongo_Blog());
     }
+
+    public function getOStatus_Site()
+    {
+        return new Betabud_Gateway_OStatus_Site(new Betabud_Dao_Mongo_OStatus_Site());
+    }
+
+    public function getOStatus_User()
+    {
+        return new Betabud_Gateway_OStatus_User(new Betabud_Dao_Mongo_OStatus_Usser());
+    }
 }
