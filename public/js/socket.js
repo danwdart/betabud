@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:1337');
+var socket = io.connect('http://betabud.dandart.co.uk:8080');
 socket.on('connect', function() {
     $('.chatlog').html('');
 });
