@@ -1,0 +1,94 @@
+<div class="widgetbox">
+    <div class="widgettitle">
+        Chatroom
+    </div>
+    <div class="widgetbody">
+        <div class="logcontainer">
+            <div class="tabs">
+                <div class="tabtitle">Subjects:</div> 
+                <div class="tab selected">
+                    General
+                </div>
+                <div class="tab">
+                    Technology
+                </div>
+            </div>
+            <div class="widgettitle" style="width: 650px;">
+                Chat Log
+            </div>
+            <div style="clear:both;"></div>
+            <div class="chatlog">
+                Logs will appear here.
+            </div>
+            <div id="chat">
+                <input type="text" id="chatline" style="width:600px;"/>
+                <input type="submit" id="submit" value="Say"/>
+            </div>
+        </div>
+        <div class="online">
+            <div class="tabs">
+                <div class="tabtitle">People:</div> 
+                <div class="tab selected">
+                    All
+                </div>
+                <div class="tab">
+                    Friends
+                </div>
+            </div>
+            <div class="widgettitle">
+                People Online Now
+            </div>
+            <div class="people">
+                Finding...
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .logcontainer {
+        width:650px;
+        float:left;
+    }
+    .chatlog {
+        border-style:inset;
+        padding:2px;
+        height:457px;
+        background-color:white;
+        overflow:auto;
+    }
+    .online {
+        width: 270px;
+        height: 470px;
+        float:right;
+    }
+    .people {
+        height: 460px;
+        background-color:white;
+        border-style:inset;
+        overflow:auto;
+    }
+    .widgetbody {
+        height: 530px;
+    }
+    .tabs {
+    }
+    .tabtitle {
+        padding:2px;
+        color:white;
+        background-color:black;
+        font-weight:900;
+        display:inline;
+    }
+    .tab {
+        padding:2px;
+        color: black;
+        background-color:white;
+        display:inline;
+    }
+    .tab.selected {
+        background-color: #eeeeee;
+        border:1px solid black;
+    }
+</style>
+<script src="">
+</script>

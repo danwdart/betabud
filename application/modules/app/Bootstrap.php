@@ -15,12 +15,15 @@ class App_Bootstrap extends Zend_Application_Module_Bootstrap
         $acl = Zend_Registry::get('acl');
         {    
             $acl->add(new Zend_Acl_Resource('app/blog'));
+            $acl->add(new Zend_Acl_Resource('app/chat'));
                  
             $acl->allow(Betabud_Model_User_Helper_UserType::TYPE_GUEST, 'app/blog', 'index');
             $acl->allow(Betabud_Model_User_Helper_UserType::TYPE_USER, 'app/blog', array(
                 'write',
                 'delete'
             ));
+
+            $acl->allow(Betabud_Model_User_Helper_UserType::TYPE_GUEST, 'app/chat', 'index');
         }
     }
 }
