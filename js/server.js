@@ -1,24 +1,19 @@
-var io = require('socket.io').listen(8080),
-    online = [];
+var online = {};
+var io = require('socket.io').listen(8080);
 
 io.sockets.on('connection', function (socket) {
-    console.log(socket);
-
-    socket.emit('message', {from: 'system', text:'user connected'});
     socket.on('heartbeat', function(identity) {
         socket.set('nick', identity.name);
-        online[identity.name] = identity.name;
-        socket.emit('onlinepeople', online);
+        online[socket.id] = identity.name;
+        socket.emit('whosonline', online);
+        socket.broadcast.emit('online', {id: socket.id, name: identity.name});
     });
     socket.on('message', function(msg) {
         console.log(msg.from + ' said: '+msg.text);
         socket.broadcast.emit('message', msg);
     });
     socket.on('disconnect', function() {
-        identity = socket.get('identity', function(err, nick) {
-            offline = {name: nick, status:'offline'};
-            socket.broadcast.emit('heartbeat', offline);
-            delete online[nick];
-        });
+        delete online[socket.id];
+        socket.broadcast.emit('offline', {id: socket.id});
     });
 });

@@ -1,27 +1,41 @@
-var socket = io.connect('http://betabud.dandart.co.uk:8080'),
-    online = [];
-function updateonline() {
-    html = online.join('<br/>');
+betabud.online = {};
+var socket = io.connect('http://betabud.dandart.co.uk:8080');
+function writeonline() {
+    html = '';
+    $.each(betabud.online, function(k,v) {
+        html+= v+'<br/>';
+    });
     $('.people').html(html);
 }
 function writemessage(data) {
+    writeline(data.from + ' said: '+data.text);
+}
+function writeline(text) {
     html = $('.chatlog').html();
-    $('.chatlog').html(html + data.from + ' said: '+data.text+'<br/>');
+    $('.chatlog').html(html + text +'<br/>');
 }
 socket.on('connect', function() {
-    socket.emit('heartbeat', {name: betabud.nickname, status: 'online'});
+    socket.emit('heartbeat', {name: betabud.nickname});
+    betabud.online[socket.id] = betabud.nickname;
+    writeonline();
     $('.chatlog').html('');
+});
+socket.on('whosonline', function(data) {
+    betabud.online = data;
+    writeonline();
+});
+socket.on('offline', function(data) {
+    writeline(betabud.online[data.id] + ' is offline');
+    delete betabud.online[data.id];
+    writeonline();
+});
+socket.on('online', function(data) {
+    betabud.online[data.id] = data.name;
+    writeonline();
+    writeline(data.name + ' is online');
 });
 socket.on('message', function(data) {
     writemessage(data);
-});
-socket.on('heartbeat', function(data) {
-    online[data.name] = data.name;
-    updateonline();
-});
-socket.on('onlinepeople', function(data) {
-    online = data;
-    updateonline();
 });
 $('#form #submit').click(function(event) {
     event.preventDefault();
