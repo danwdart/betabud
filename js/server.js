@@ -12,7 +12,7 @@ io.sockets.on('connection', function (socket) {
     });
     socket.on('message', function(msg) {
         console.log(msg.from + ' said: '+msg.text);
-        socket.emit('message', msg);
+        socket.broadcast.emit('message', msg);
     });
     socket.on('disconnect', function() {
         identity = socket.get('identity', function(err, nick) {

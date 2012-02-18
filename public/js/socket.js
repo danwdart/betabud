@@ -4,13 +4,16 @@ function updateonline() {
     html = online.join('<br/>');
     $('.people').html(html);
 }
+function writemessage(data) {
+    html = $('.chatlog').html();
+    $('.chatlog').html(html + data.from + ' said: '+data.text+'<br/>');
+}
 socket.on('connect', function() {
     socket.emit('heartbeat', {name: betabud.nickname, status: 'online'});
     $('.chatlog').html('');
 });
 socket.on('message', function(data) {
-    html = $('.chatlog').html();
-    $('.chatlog').html(html + data.from + ' said: '+data.text+'<br/>');
+    writemessage(data);
 });
 socket.on('heartbeat', function(data) {
     online[data.name] = data.name;
@@ -24,6 +27,8 @@ $('#form #submit').click(function(event) {
     event.preventDefault();
     text = $('#chatline').val();
     $('#chatline').val('');
-    socket.emit('message',{from: betabud.nickname, text:text});
+    msg = {from:betabud.nickname, text:text};
+    socket.emit('message',msg);
+    writemessage(msg);
     return false;
 });
