@@ -21,8 +21,10 @@
                 Logs will appear here.
             </div>
             <div id="chat">
+                <form id="form">
                 <input type="text" id="chatline" style="width:600px;"/>
                 <input type="submit" id="submit" value="Say"/>
+                </form>
             </div>
         </div>
         <div class="online">
@@ -90,5 +92,14 @@
         border:1px solid black;
     }
 </style>
-<script src="">
+<script src="http://localhost:1337/socket.io/socket.io.js"></script>
+<script>
+betabud = {};
+<?php if(Betabud_Auth::getInstance()->hasIdentity()) :?>
+betabud.nickname = '<?php echo Betabud_Auth::getInstance()->getIdentity()->getUser()->getNick();?>';
+<?php else : ?>
+betabud.nickname = 'Guest<?php echo uniqid();?>';
+<?php endif;?>
 </script>
+<script src="/js/socket.js"></script>
+
