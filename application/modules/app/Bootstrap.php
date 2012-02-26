@@ -16,6 +16,7 @@ class App_Bootstrap extends Zend_Application_Module_Bootstrap
         {    
             $acl->add(new Zend_Acl_Resource('app/blog'));
             $acl->add(new Zend_Acl_Resource('app/chat'));
+            $acl->add(new Zend_Acl_Resource('app/video'));
                  
             $acl->allow(Betabud_Model_User_Helper_UserType::TYPE_GUEST, 'app/blog', 'index');
             $acl->allow(Betabud_Model_User_Helper_UserType::TYPE_USER, 'app/blog', array(
@@ -24,6 +25,7 @@ class App_Bootstrap extends Zend_Application_Module_Bootstrap
             ));
 
             $acl->allow(Betabud_Model_User_Helper_UserType::TYPE_GUEST, 'app/chat', 'index');
+            $acl->allow(Betabud_Model_User_Helper_UserType::TYPE_GUEST, 'app/video', 'index');
         }
     }
 }

@@ -94,12 +94,13 @@
 </style>
 <script src="http://betabud.dandart.co.uk:8080/socket.io/socket.io.js"></script>
 <script>
+$(document).ready(function() {
 betabud = {};
 <?php if(Betabud_Auth::getInstance()->hasIdentity()) :?>
 betabud.nickname = '<?php echo Betabud_Auth::getInstance()->getIdentity()->getUser()->getNick();?>';
 <?php else : ?>
 betabud.nickname = 'Guest<?php echo uniqid();?>';
 <?php endif;?>
+});
 </script>
 <script src="/js/socket.js"></script>
-

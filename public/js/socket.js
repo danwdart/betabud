@@ -1,3 +1,4 @@
+$(document).ready(function() {
 betabud.online = {};
 var socket = io.connect('http://betabud.dandart.co.uk:8080');
 function writeonline() {
@@ -45,4 +46,5 @@ $('#form #submit').click(function(event) {
     socket.emit('message',msg);
     writemessage(msg);
     return false;
+});
 });
