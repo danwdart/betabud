@@ -56,6 +56,11 @@ class Betabud_Model_OStatus_User extends Betabud_Model_Abstract_Base
         return $this->_getField(self::FIELD_ACCESS_TOKEN, null);
     }
 
+    public function setAccessToken($strAccessToken)
+    {
+        $this->_setField(self::FIELD_ACCESS_TOKEN, $strAccessToken);
+    }
+
     public function getAccessTokenObject()
     {
         return unserialize($this->getAccessToken());
@@ -70,6 +75,7 @@ class Betabud_Model_OStatus_User extends Betabud_Model_Abstract_Base
         }
         return $screen_name;
     }
+
     public static function retrieveMine()
     {
         //find all by user
