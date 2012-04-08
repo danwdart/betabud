@@ -1,9 +1,65 @@
-Betabud's mongo can go into betabud
-betabud's propel can change to zenddb
+Page loader - load all apps, or autorun JS
+Video player:
+    Layout
+    API: Retrieve
+    API: Share
+    API: External
+    API: External share
+
+Audio player:
+    Layout
+    API: Retrieve
+    API: Share
+    API: External
+    API: External share
+
+Picture viewer:
+    Layout
+    API: Retrieve
+    API: Share
+    API: External
+    API: External share
+
+Blog:
+    Fix
+
+Email:
+    Layout
+    SMTP
+    POP
+
+Office:
+    Text editor
+
+Chat:
+    IRC
+    Jabber
+
+Bookmarks in main dock
+
+Microblogger:
+    Link to all API services
+        Auth in iframe redirect closes (find out how)
+
+Wikipedia:
+    Definitions viewer and cacher
+
+
+
+Utils:
+    User mgmt
+    RHS file manager and syncher
+    Node ssh
+    Syncher - with another instance
+    Updater
+        Git pull
+        Auto node
+    Wallpaper
+    
+
 bibud's apps can go to betabud
 fix redirects
 Make modal and modeless dialogs (fancybox?)
-Make header refresh title from app
 Do App Metadata (XML)
 Log apps gone on and actions taken
 Make login a popdown
